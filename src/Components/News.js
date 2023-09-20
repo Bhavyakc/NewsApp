@@ -14,11 +14,12 @@ export class News extends Component {
   
     }
     this.pagesize = props.pagesize;
+    this.category=props.category;
   }
   
   async componentDidMount(){
     console.log("cdm")
-    let url=`https://newsapi.org/v2/top-headlines?country=in&apiKey=ff39b69a658e42cebc994a5a5a3b7bea&page=1&page=1&pagesize=${this.props.pagesize}`;
+    let url=`https://newsapi.org/v2/top-headlines?category=${this.props.category}&country=in&apiKey=ff39b69a658e42cebc994a5a5a3b7bea&page=1&pagesize=${this.props.pagesize}`;
     let data=await fetch(url);
     let parsedData=await data.json()
     this.setState({articles: parsedData.articles,
@@ -34,7 +35,7 @@ export class News extends Component {
         console.log("End of todays top headline articles");
     }
     else{
-      let url=`https://newsapi.org/v2/top-headlines?country=in&apiKey=ff39b69a658e42cebc994a5a5a3b7bea&page=${this.state.page+1}&pagesize=${this.props.pagesize}`;
+      let url=`https://newsapi.org/v2/top-headlines?category=${this.props.category}&country=in&apiKey=ff39b69a658e42cebc994a5a5a3b7bea&page=${this.state.page+1}&pagesize=${this.props.pagesize}`;
       
       let nextpage=this.state.page+1;
       // console.log(nextpage,this.state.totalresult/this.props.pagesize);
@@ -50,7 +51,7 @@ export class News extends Component {
 
   handleonprev=async()=>{
     console.log("prev");
-    let url=`https://newsapi.org/v2/top-headlines?country=in&apiKey=ff39b69a658e42cebc994a5a5a3b7bea&page=${this.state.page-1}&pagesize=${this.props.pagesize}`;
+    let url=`https://newsapi.org/v2/top-headlines?category=${this.props.category}&country=in&apiKey=ff39b69a658e42cebc994a5a5a3b7bea&page=${this.state.page-1}&pagesize=${this.props.pagesize}`;
     let data=await fetch(url);
     let parsedData=await data.json()
 
@@ -65,13 +66,15 @@ export class News extends Component {
         <div className="contianer my-3 mx-5">
         <h3>Here is your news</h3>
           <div className="row">
-          {
+          { 
             this.state.articles.map((value)=>{
+              if (value.urlToImage !=null) {   
               return <div className="col-md-4 " key={value.url}>
                 <NewsItem title={value.title?value.title.slice(0,80):" "} 
                 desc={value.description?value.description.slice(0,82):" "} urlToImage={value.urlToImage} newsurl={value.url}
                 />
-              </div>
+                </div>
+              }
             })
           }
          </div>
