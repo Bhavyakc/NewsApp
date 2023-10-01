@@ -8,48 +8,55 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 class App extends Component {
+ 
   render() {
+    let {country } = this.props;
+  
+    // const { country } = this.state;
+    console.log("Country-",country);
     let c = "Bhavya";
+    
     return (
         <>
-        <BrowserRouter>
+       
           <Navbar />
+          
           <Routes>
             <Route
-             exact path="/" 
-             element={<News pagesize={9}key="general" category={"general"} />}
+             exact path="/"
+             element={<News country={"in"} pagesize={9} key="business" category={"general"} />}
             />
             <Route
              exact path="/business"
-             element={<News pagesize={9}key="business" category={"business"} />}
+             element={<News country={"in"} pagesize={9} key="business" category={"business"} />}
             />
             <Route
              exact path="/entertainment"
-             element={<News pagesize={9}key="entertainment" category={"entertainment"} />}
+             element={<News country={"in"}  pagesize={9} key="entertainment" category={"entertainment"} />}
             />
             <Route
              exact path="/general"
-             element={<News pagesize={9}key="general" category={"general"} />}
+             element={<News country={"in"} pagesize={9} key="general" category={"general"} />}
             />
             <Route
              exact path="/health"
-             element={<News pagesize={9}key="health" category={"health"} />}
+             element={<News country={"in"} pagesize={9} key="health" category={"health"} />}
             />
             <Route
              exact path="/science"
-             element={<News pagesize={9}key="science" category={"science"} />}
+             element={<News country={"in"} pagesize={9}  key="science" category={"science"} />}
             />
             <Route
              exact path="/sports"
-             element={<News pagesize={9}key="sports" category={"sports"} />}
+             element={<News country={"in"} pagesize={9} key="sports" category={"sports"} />}
             />
             <Route
              exact path="/technology"
-             element={<News pagesize={9}key="technology" category={"technology"} />}
+             element={<News country={"in"} pagesize={9} key="technology" category={"technology"} />}
             />
           </Routes>
           {/* <div>Hello this is my first class based Component {this.c}</div> */}
-        </BrowserRouter>
+        
         </>
     );
   }
